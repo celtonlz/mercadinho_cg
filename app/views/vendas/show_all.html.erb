@@ -1,0 +1,39 @@
+<h1>Vendas Cadastradas</h1>
+
+<% if @vendas.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>CPF</th>
+        <th>Total</th>  
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @vendas.each do |venda| %>
+        <tr data-venda-id="<%= venda.id %>">
+           <td><%= venda.id %></td>
+          <td><%= venda.cliente_nome %></td>
+          <td><%= venda.cliente_cpf %></td>
+          <td>R$ <%= venda.total %></td>
+          <td>
+            <a href="<%= venda_path(venda) %>">Detalhes</a>
+            <a href="<%= edit_venda_path(venda) %>">Editar</a>
+            <%= button_to "Excluir", venda_path(venda), method: :delete, form: {data: { turbo_confirm: "Tem certeza que deseja apagar a venda?" } } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="pagination">
+    <%= paginate @vendas %> <!-- Link de paginação gerado pelo Kaminari -->
+  </div>
+<% else %>
+  <p>Nenhuma venda cadastrada.</p>
+<% end %>
+
+<a href="<%= new_venda_path %>">Criar Nova Venda</a>  
+<%= link_to 'Exportar PDF', export_pdf_vendas_path, target: "_blank" %>
+<a href="<%= root_path %>">Voltar</a>

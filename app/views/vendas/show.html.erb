@@ -1,0 +1,36 @@
+<h1>Detalhes da Venda</h1>
+
+<% if notice %>
+  <div class="alert alert-success">
+    <strong><%= notice %></strong>
+  </div>
+<% end %>
+
+<p><strong>Nome do Cliente:</strong> <%= @venda.cliente_nome %></p>
+<p><strong>CPF do Cliente:</strong> <%= @venda.cliente_cpf %></p>
+<p><strong>Total:</strong> R$ <%= @venda.total %></p>
+
+<h3>Produtos</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Preço</th>
+      <th>Quantidade</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @venda.venda_produtos.each do |venda_produto| %>
+      <tr>
+        <td><%= venda_produto.produto.nome %></td>
+        <td>R$ <%= venda_produto.produto.preco %></td>
+        <td><%= venda_produto.quantidade %></td>
+        <td>R$ <%= venda_produto.produto.preco * venda_produto.quantidade %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Voltar para a lista de vendas', show_vendas_path %>
+<%= link_to 'Voltar para a página inicial', root_path %>

@@ -1,0 +1,24 @@
+<h1>Criar Nova Venda</h1>
+<%= form_with model: @venda, url: vendas_path, local: true do |form| %>
+  <div>
+    <%= form.label :cliente_nome, "Nome do Cliente" %>
+    <%= form.text_field :cliente_nome %>
+  </div>
+  <div>
+    <%= form.label :cliente_cpf, "CPF do Cliente" %>
+    <%= form.text_field :cliente_cpf %>
+  </div>
+
+  <h3>Produtos</h3>
+  <% @produtos.each do |produto| %>
+    <div>
+      <%= check_box_tag "produtos[#{produto.id}]", 1 %>
+      <%= label_tag "produtos_#{produto.id}", "#{produto.nome} - R$ #{produto.preco}" %>
+      <%= number_field_tag "quantidades[#{produto.id}]", 1, min: 1 %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit "Criar Venda" %>
+  </div>
+<% end %>

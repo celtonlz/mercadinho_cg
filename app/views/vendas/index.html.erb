@@ -1,0 +1,17 @@
+<h1>Bem-Vindo ao Mercadinho CG</h1>
+<div>
+  <ul>
+    <li>
+      <a href="<%= new_venda_path %>" class="button">Criar Nova Venda</a>
+    </li>
+    <li>
+      <a href="<%= show_vendas_path %>" class="button">Mostrar Vendas</a>
+    </li>
+    <li>
+      <%= link_to 'Exportar para CSV', export_csv_vendas_path %>
+    </li>
+    <li> 
+      <%= link_to "Upload de Produtos", new_upload_path, class: "btn btn-primary" %>
+    </li>
+  </ul>
+</div>
